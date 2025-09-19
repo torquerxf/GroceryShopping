@@ -7,6 +7,18 @@ class ItemNotFoundException extends Exception {
 }
 
 public class GroceryShopping {
+
+    static int searchItem(String[] item, String inputItem){
+        int itemIndex = -1;
+        for (int i=0;i<item.length;i++){
+            if (item[i].equalsIgnoreCase(inputItem)){
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
+    }
+    
     public static void main(String[] args) {
         String[] item = new String[15]; // Array to store item names
         float[] price = new float[15]; // Array to store item prices
@@ -43,19 +55,11 @@ public class GroceryShopping {
                         System.out.print("Thank you for shopping with us! Type 'exit' to quit or press Enter to continue shopping: ");
                         break;
                     }
-                    
-                    // Find the item in the array
-                    int itemIndex = -1;
-                    for (int i=0;i<item.length;i++){
-                        if (item[i].equalsIgnoreCase(inputItem)){
-                            itemIndex = i;
-                            break;
-                        }
-                    }
 
-                    // If item not found, throw custom exception
+                    int itemIndex = -1;
+                    itemIndex = searchItem(item, inputItem);
                     if (itemIndex==-1){
-                        throw new ItemNotFoundException("Item " + inputItem + " not found. Please try again.");
+                        throw new ItemNotFoundException("Item: " + inputItem + " not found. Please try again.");
                     }
 
                     // If item found, ask for quantity
