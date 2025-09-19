@@ -26,6 +26,15 @@ public class GroceryShopping {
         }
         return sum/price.length;
     }
+
+    static void filterItemsBelowPrice(String[] item, float[] price, float threshold){
+        System.out.println("Items below price " + threshold + ":");
+        for (int i=0;i<price.length;i++){
+            if (price[i]<threshold){
+                System.out.println(item[i] + " : " + price[i]);
+            }
+        }
+    }
     
     public static void main(String[] args) {
         String[] item = new String[15]; // Array to store item names
@@ -54,7 +63,7 @@ public class GroceryShopping {
             double totalBill = 0.0d; // Variable to store total bill amount
             while(true){ // loop which runs as longs the user wants to add items
                 try {
-                    System.out.println("Enter the item name to get its price (or type 'Finish' to quit): ");
+                    System.out.println("Enter the item name to get its price (or type 'Finish' to quit or type 'Filter' to filter items below your threshold): ");
                     String inputItem = scanner.nextLine();
 
                     // Finish input to break the inner loop
@@ -62,6 +71,14 @@ public class GroceryShopping {
                         System.out.println("Total Bill Amount: " + totalBill);
                         System.out.print("Thank you for shopping with us! Type 'exit' to quit or press Enter to continue shopping: ");
                         break;
+                    }
+
+                    if (inputItem.equalsIgnoreCase("filter")){
+                        System.out.println("Enter the price threshold: ");
+                        float threshold = scanner.nextFloat();
+                        scanner.nextLine(); // Consume the newline character
+                        filterItemsBelowPrice(item, price, threshold);
+                        continue; // Continue to the next iteration of the loop
                     }
 
                     int itemIndex = -1;
