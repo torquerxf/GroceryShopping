@@ -18,6 +18,14 @@ public class GroceryShopping {
         }
         return itemIndex;
     }
+
+    static float calculateAveragePrice(float[] price){
+        float sum = 0.0f;
+        for (float p : price){
+            sum += p;
+        }
+        return sum/price.length;
+    }
     
     public static void main(String[] args) {
         String[] item = new String[15]; // Array to store item names
@@ -67,12 +75,16 @@ public class GroceryShopping {
                     int quantity = scanner.nextInt();
                     scanner.nextLine(); // Consume the newline character
 
-                    // Calcualte the total cost for the item and add to total bill
+                    // Calculate the total cost for the item and add to total bill
                     float totalCost = price[itemIndex] * quantity;
                     totalBill += totalCost;
 
-                    // Display the cost for the current item and the running total bill
+                    // Calculate and display the average price of all items
+                    float averagePrice = calculateAveragePrice(price);
+
+                    // Display the cost for the current item, the average price of all items and the running total bill
                     System.out.println("Cost for " + quantity + " " + item[itemIndex] + "(s): " + totalCost);
+                    System.out.println("Average Price of all items: " + averagePrice);
                     System.out.println("Running Total Bill: " + totalBill);
                     
                 } catch (ItemNotFoundException e) {
